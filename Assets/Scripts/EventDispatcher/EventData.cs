@@ -40,8 +40,6 @@ public class EventData
             m_keys.RemoveAt(i);
             m_values.RemoveAt(i);
         }
-
-        // TODO - Save/Sync?
     }
     // Summary: Removes key and its corresponding value from the preferences.
     //
@@ -57,8 +55,6 @@ public class EventData
             m_keys.RemoveAt(i);
             m_values.RemoveAt(i);
         }
-
-        // TODO - Save/Sync?
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.
