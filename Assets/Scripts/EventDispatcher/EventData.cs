@@ -1,5 +1,4 @@
-﻿using System; // Convert
-using System.Collections.Generic; // List
+﻿using System.Collections.Generic; // List
 using UnityEngine; // GameObject
 
 /// <summary>
