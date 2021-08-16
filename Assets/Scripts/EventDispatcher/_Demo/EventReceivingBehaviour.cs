@@ -37,11 +37,38 @@ public class EventReceivingBehaviour : MonoBehaviour
 
     public void enterFrame(EventData eventData)
     {
-        Debug.Log("Entering Frame: " + eventData.GetFloat("time"));
+        int i = eventData.GetInt("int");
+        float f = eventData.GetFloat("float");
+        GameObject gO = eventData.GetGameObject("gameObject");
+        string s = eventData.GetString("string", "testing");
+
+        if (eventData.GetBool("bool"))
+        {
+            Debug.Log(
+                string.Concat(
+                eventData.GetString("name"), ": ",
+                eventData.GetFloat("time"),
+                ", i: ", i,
+                ", f: ", f,
+                ", gO: ", gO.name,
+                ", s: ", s
+            ));
+
+            eventData.DeleteKey("time");
+
+            if (eventData.HasKey("time"))
+            {
+                Debug.Log("DeleteKey failed.");
+            }
+        }
     }
 
     public void lateUpdate(EventData eventData)
     {
-        Debug.Log("Late Updating: " + eventData.GetFloat("time"));
+        Debug.Log(
+            string.Concat(
+            eventData.GetString("name"), ": ",
+            eventData.GetFloat("time")
+        ));
     }
 }

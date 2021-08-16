@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic; // List
+﻿using System; // Convert
+using System.Collections.Generic; // List
 using UnityEngine; // GameObject
 
 /// <summary>
@@ -28,6 +29,22 @@ public class EventData
         m_values = new List<object>();
     }
 
+    #region Private Instance Methods
+    private T GetValue<T>(string key, T defaultValue)
+    {
+        if (m_keys.Contains(key))
+        {
+            defaultValue = (T)m_values[m_keys.IndexOf(key)];
+        }
+        else
+        {
+            SetData(key, defaultValue);
+        }
+
+        return defaultValue;
+    }
+    #endregion
+
     #region Public EventData Management Methods
     // Summary: Removes all m_keys and m_values from the preferences.
     // Use with caution.
@@ -35,8 +52,6 @@ public class EventData
     {
         for (int i = m_keys.Count - 1; i > -1; i--)
         {
-            m_keys[i] = null;
-            m_values[i] = null;
             m_keys.RemoveAt(i);
             m_values.RemoveAt(i);
         }
@@ -50,8 +65,6 @@ public class EventData
         if (m_keys.Contains(key))
         {
             int i = m_keys.IndexOf(key);
-            m_keys[i] = null;
-            m_values[i] = null;
             m_keys.RemoveAt(i);
             m_values.RemoveAt(i);
         }
@@ -65,17 +78,7 @@ public class EventData
     //   defaultValue:
     public bool GetBool(string key, bool defaultValue)
     {
-        if (m_keys.Contains(key))
-        {
-            defaultValue = (bool)m_values[m_keys.IndexOf(key)];
-        }
-        else
-        {
-            // This is convenient, but is this what PlayerPrefs does?
-            SetData(key, defaultValue);
-        }
-
-        return defaultValue;
+        return GetValue(key, defaultValue);
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.
@@ -97,17 +100,7 @@ public class EventData
     //   defaultValue:
     public int GetInt(string key, int defaultValue)
     {
-        if (m_keys.Contains(key))
-        {
-            defaultValue = (int)m_values[m_keys.IndexOf(key)];
-        }
-        else
-        {
-            // This is convenient, but is this what PlayerPrefs does?
-            SetData(key, defaultValue);
-        }
-
-        return defaultValue;
+        return GetValue(key, defaultValue);
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.
@@ -129,17 +122,7 @@ public class EventData
     //   defaultValue:
     public float GetFloat(string key, float defaultValue)
     {
-        if (m_keys.Contains(key))
-        {
-            defaultValue = (float)m_values[m_keys.IndexOf(key)];
-        }
-        else
-        {
-            // This is convenient, but is this what PlayerPrefs does?
-            SetData(key, defaultValue);
-        }
-
-        return defaultValue;
+        return GetValue(key, defaultValue);
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.
@@ -161,17 +144,7 @@ public class EventData
     //   defaultValue:
     public GameObject GetGameObject(string key, GameObject defaultValue)
     {
-        if (m_keys.Contains(key))
-        {
-            defaultValue = (GameObject)m_values[m_keys.IndexOf(key)];
-        }
-        else
-        {
-            // This is convenient, but is this what PlayerPrefs does?
-            SetData(key, defaultValue);
-        }
-
-        return defaultValue;
+        return GetValue(key, defaultValue);
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.
@@ -193,17 +166,7 @@ public class EventData
     //   defaultValue:
     public object GetObject(string key, object defaultValue)
     {
-        if (m_keys.Contains(key))
-        {
-            defaultValue = m_values[m_keys.IndexOf(key)];
-        }
-        else
-        {
-            // This is convenient, but is this what PlayerPrefs does?
-            SetData(key, defaultValue);
-        }
-
-        return defaultValue;
+        return GetValue(key, defaultValue);
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.
@@ -225,17 +188,7 @@ public class EventData
     //   defaultValue:
     public string GetString(string key, object defaultValue)
     {
-        if (m_keys.Contains(key))
-        {
-            defaultValue = (string)m_values[m_keys.IndexOf(key)];
-        }
-        else
-        {
-            // This is convenient, but is this what PlayerPrefs does?
-            SetData(key, defaultValue);
-        }
-
-        return (string)defaultValue;
+        return (string)GetValue(key, defaultValue);
     }
     // Summary: Returns the value corresponding to key in the preference file
     // if it exists.

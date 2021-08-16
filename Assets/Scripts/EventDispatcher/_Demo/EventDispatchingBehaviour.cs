@@ -12,6 +12,11 @@ public class EventDispatchingBehaviour : MonoBehaviour
     {
         m_eventDataEnterFrame = new EventData("enterFrame");
         m_eventDataLateUpdate = new EventData("lateUpdate");
+
+        m_eventDataEnterFrame.SetData("bool", true);
+        m_eventDataEnterFrame.SetData("int", 7);
+        m_eventDataEnterFrame.SetData("float", 7.2f); // force float type
+        m_eventDataEnterFrame.SetData("gameObject", gameObject);
     }
 
     void Update()
@@ -19,6 +24,7 @@ public class EventDispatchingBehaviour : MonoBehaviour
         if (m_enableEventDispatch)
         {
             m_eventDataEnterFrame.SetData("time", Time.realtimeSinceStartup);
+
             EventDispatcher.DispatchEvent(m_eventDataEnterFrame);
         }
     }
@@ -28,6 +34,7 @@ public class EventDispatchingBehaviour : MonoBehaviour
         if (m_enableEventDispatch)
         {
             m_eventDataLateUpdate.SetData("time", Time.realtimeSinceStartup);
+
             EventDispatcher.DispatchEvent(m_eventDataLateUpdate);
         }
     }
