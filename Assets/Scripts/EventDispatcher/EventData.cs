@@ -49,11 +49,8 @@ public class EventData
     // Use with caution.
     public void DeleteAll()
     {
-        for (int i = m_keys.Count - 1; i > -1; i--)
-        {
-            m_keys.RemoveAt(i);
-            m_values.RemoveAt(i);
-        }
+        m_keys.Clear();
+        m_values.Clear();
     }
     // Summary: Removes key and its corresponding value from the preferences.
     //
